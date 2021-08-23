@@ -13,15 +13,21 @@ function Home() {
     }
   }, [data]);
 
-  if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   return (
     <div className="jumbotron">
       <div className="container container-fluid">
-        <div className="text-center">
+        <div className="text-center mt-5">
           <h3>Character Details</h3>
         </div>
+        {loading && (
+          <div className="text-center mt-5">
+            <div className="spinner-border text-primary " role="status">
+              <span className="sr-only">Loading...</span>
+            </div>
+          </div>
+        )}
         <div className="row mt-2">
           {users &&
             users.map((item, index) => (
@@ -36,8 +42,8 @@ function Home() {
                   </Card.Body>
                   <Card.Footer>
                     <div className="table-responsive">
-                      <table class="table">
-                        <thead class="thead-dark">
+                      <table className="table">
+                        <thead className="thead-dark">
                           <tr>
                             <th scope="col">#</th>
                             <th scope="col">Episode's Name</th>
@@ -45,9 +51,9 @@ function Home() {
                         </thead>
                         <tbody>
                           {item.episode.map((ep, no) => (
-                            <tr>
-                              {" "}
-                              <th scope="row">{no + 1}</th> <td> {ep.name}</td>
+                            <tr key={no}>
+                              <th scope="row">{no + 1}</th>
+                              <td>{ep.name}</td>
                             </tr>
                           ))}
                         </tbody>
